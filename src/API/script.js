@@ -23,7 +23,7 @@ export const getToken = async () => {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
       },
       body: new URLSearchParams({
-        app_key: appKey,
+        app_key: 504848,
         timestamp: timestamp,
         code: code,
       }),
