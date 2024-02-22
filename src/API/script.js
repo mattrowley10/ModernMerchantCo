@@ -44,7 +44,7 @@ export const getToken = async () => {
       },
     });
     const result = await response.json();
-    console.log(result.status);
+    return result;
   } catch (error) {
     console.error("Error getting token");
   }
