@@ -18,7 +18,14 @@ export const getToken = async () => {
   try {
     const code = localStorage.getItem("authCode");
     const timestamp = Date.now();
-    const queryString = `?app_key=${appKey}&timestamp=${timestamp}&code=${code}`;
+    const signMethod = "sha256";
+    const sign = "";
+    const params = new URLSearchParams();
+    params.append("app_key", appKey);
+    params.append("timestamp", timestamp.toString());
+    params.append("code", code);
+    params.append("sign_method", signMethod);
+    params.append("sign", sign);
     const apiUrl = `${systemUrl}/auth/token/security/create${queryString}`;
     const response = await fetch(apiUrl, {
       method: "POST",
