@@ -26,7 +26,6 @@ export const getToken = async (systemUrl, appKey, appSecret) => {
         app_key: appKey,
         timestamp: timestamp,
         code: code,
-        uuid: uuid,
       }),
     });
     const result = await response.json();
