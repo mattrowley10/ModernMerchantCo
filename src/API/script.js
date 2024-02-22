@@ -54,6 +54,4 @@ export const getToken = async () => {
   }
 };
 
-if (code) {
-  getToken();
-}
+getToken();
