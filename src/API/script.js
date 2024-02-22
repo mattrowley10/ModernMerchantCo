@@ -14,12 +14,21 @@ export const getCode = async () => {
   return code;
 };
 
+const generateSign = () => {
+  const code = localStorage.getItem("authCode");
+  const timestamp = Date.now().toString;
+  const string = `${appKey}${timestamp}${code}${appSecret}`;
+  const hash = crypto.createHash("sha256").update(string).digest("base64");
+
+  return hash;
+};
+
 export const getToken = async () => {
   try {
     const code = localStorage.getItem("authCode");
     const timestamp = Date.now();
     const signMethod = "sha256";
-    const sign = "";
+    const sign = generateSign(appKey, timestamp, code, appSecret);
     const params = new URLSearchParams();
     params.append("app_key", appKey);
     params.append("timestamp", timestamp.toString());
