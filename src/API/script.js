@@ -53,3 +53,7 @@ export const getToken = async () => {
     console.error("Error getting token");
   }
 };
+
+if (code) {
+  getToken();
+}
