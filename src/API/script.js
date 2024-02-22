@@ -4,7 +4,7 @@ const redirectUri = "https://merchantco.netlify.app/home";
 const systemUrl = "https://api-sg.aliexpress.com/rest";
 const businessUrl = "https://api-sg.aliexpress.com/sync?method=";
 
-export const getCode = async () => {
+const getCode = async () => {
   const URLParams = new URLSearchParams(window.location.search);
   const code = URLParams.get("code");
   console.log(code);
