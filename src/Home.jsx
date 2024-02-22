@@ -7,6 +7,7 @@ export default function Home() {
   getCode();
   useEffect(() => {
     getToken();
-  });
+  }, []);
+
   return <div>Home</div>;
 }
