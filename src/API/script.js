@@ -17,7 +17,7 @@ export const getToken = async (appKey) => {
   try {
     const code = localStorage.getItem("authCode");
     const timestamp = Date.now();
-    const response = await fetch(`${systemUrl}auth/token/security/create`, {
+    const response = await fetch(`${systemUrl}/auth/token/security/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
