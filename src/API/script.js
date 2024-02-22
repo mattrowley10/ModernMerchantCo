@@ -26,10 +26,13 @@ const generateSign = () => {
 export const getToken = async () => {
   try {
     const code = localStorage.getItem("authCode");
+    console.log(code);
     const timestamp = Date.now().toString();
+    console.log(timestamp);
     const encodedTimestamp = encodedURIComponent(timestamp);
     const signMethod = "sha256";
     const sign = generateSign(appKey, timestamp, code, appSecret);
+    console.log(sign);
     const params = new URLSearchParams();
     params.append("app_key", appKey);
     params.append("timestamp", timestamp);
@@ -37,6 +40,7 @@ export const getToken = async () => {
     params.append("sign_method", signMethod);
     params.append("sign", sign);
     const apiUrl = `${systemUrl}/auth/token/security/create${params.toString()}`;
+    console.log(apiUrl);
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
