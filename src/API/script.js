@@ -7,6 +7,7 @@ const businessUrl = "https://api-sg.aliexpress.com/sync?method=";
 export const getCode = async () => {
   const URLParams = new URLSearchParams(window.location.search);
   const code = URLParams.get("code");
+  console.log(code);
   if (code) {
     localStorage.setItem("authCode", code);
   }
@@ -26,6 +27,7 @@ const generateSign = () => {
 export const getToken = async () => {
   try {
     const code = localStorage.getItem("authCode");
+    console.log(code);
     const timestamp = Date.now();
     const signMethod = "sha256";
     const sign = generateSign(appKey, timestamp, code, appSecret);
