@@ -13,7 +13,7 @@ export const getCode = () => {
   return code;
 };
 
-export const getToken = async (appKey) => {
+export const getToken = async () => {
   try {
     const code = localStorage.getItem("authCode");
     const timestamp = Date.now();
