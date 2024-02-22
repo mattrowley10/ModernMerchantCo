@@ -4,12 +4,13 @@ const redirectUri = "https://merchantco.netlify.app/home";
 const systemUrl = "https://api-sg.aliexpress.com/rest";
 const businessUrl = "https://api-sg.aliexpress.com/sync?method=";
 
-export const getCode = () => {
+export const getCode = async () => {
   const URLParams = new URLSearchParams(window.location.search);
   const code = URLParams.get("code");
   if (code) {
     localStorage.setItem("authCode", code);
   }
+  console.log(code);
   return code;
 };
 
@@ -23,7 +24,8 @@ export const getToken = async () => {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
       },
       body: new URLSearchParams({
-        app_key: 504848,
+        app_key: appKey,
+        app_secret: appSecret,
         timestamp: timestamp,
         code: code,
       }),
