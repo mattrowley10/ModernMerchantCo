@@ -4,7 +4,7 @@ import { getToken } from "./API/script";
 import { getCode } from "./API/script";
 
 export default function Home() {
-  getCode();
+  //   getCode();
 
   useEffect(() => {
     getToken();
