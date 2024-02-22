@@ -1,4 +1,5 @@
 const appKey = "504848";
+const appSecret = "e9iSobbC8PWrnrcamXNAE5uX404dM8GP";
 const redirectUri = "https://merchantco.netlify.app/home";
 const systemUrl = "https://api-sg.aliexpress.com/rest";
 const businessUrl = "https://api-sg.aliexpress.com/sync?method=";
@@ -12,7 +13,7 @@ export const getCode = () => {
   return code;
 };
 
-export const getToken = async (systemUrl, appKey) => {
+export const getToken = async (systemUrl, appKey, appSecret) => {
   try {
     const code = localStorage.getItem("authCode");
     const timestamp = Date.now();
@@ -23,7 +24,6 @@ export const getToken = async (systemUrl, appKey) => {
       },
       body: new URLSearchParams({
         app_key: appKey,
-        sign_method: "sha256",
         timestamp: timestamp,
         code: code,
         uuid: uuid,
