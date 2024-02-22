@@ -3,8 +3,18 @@ const redirectUri = "https://merchantco.netlify.app/home";
 const systemUrl = "https://api-sg.aliexpress.com/rest";
 const businessUrl = "https://api-sg.aliexpress.com/sync?method=";
 
+export const getCode = () => {
+  const URLParams = new URLSearchParams(window.location.search);
+  const code = URLParams.get("code");
+  if (code) {
+    localStorage.setItem("authCode", code);
+  }
+  return code;
+};
+
 export const getToken = async (systemUrl, appKey) => {
   try {
+    const code = localStorage.getItem("authCode");
     const timestamp = Date.now();
     const response = await fetch(systemUrl + "auth/token/security/create", {
       method: "POST",
