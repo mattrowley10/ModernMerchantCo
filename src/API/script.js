@@ -1,4 +1,4 @@
-import crypto from "crypto-browserify";
+import CryptoJS from "crypto-js";
 
 const appKey = "504848";
 const sign_method = "sha256";
@@ -25,7 +25,7 @@ const generateSign = () => {
   console.log(timestamp);
   const string = `${appKey}${timestamp}${code}${appSecret}${sign_method}`;
   console.log(string);
-  const hash = crypto.createHash("sha256").update(string).digest("hex");
+  const hash = CryptoJS.SHA256(string).toString();
   console.log(hash);
   return hash;
 };
