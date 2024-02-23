@@ -31,7 +31,7 @@ export const getToken = async () => {
     console.log(code);
     const timestamp = Date.now().toString();
     console.log(timestamp);
-    const sign = generateSign(appKey, timestamp, code, appSecret, sign_method);
+    const sign = generateSign();
     console.log(sign);
     const url =
       `${systemUrl}${systemUrlApi}` +
