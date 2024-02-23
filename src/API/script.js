@@ -3,6 +3,7 @@ const sign_method = "sha256";
 const appSecret = "e9iSobbC8PWrnrcamXNAE5uX404dM8GP";
 const redirectUri = "https://merchantco.netlify.app/home";
 const systemUrl = "https://api-sg.aliexpress.com/rest";
+const systemUrlApi = "/auth/token/security/create";
 const businessUrl = "https://api-sg.aliexpress.com/sync?method=";
 
 export const getCode = async () => {
@@ -32,22 +33,22 @@ export const getToken = async () => {
     console.log(timestamp);
     const sign = generateSign(appKey, timestamp, code, appSecret, sign_method);
     console.log(sign);
-    const params = new URLSearchParams();
-    params.append("app_key", appKey);
-    params.append("timestamp", timestamp);
-    params.append("code", code);
-    params.append("sign_method", sign_method);
-    params.append("sign", sign);
-    const apiUrl = `${systemUrl}/auth/token/security/create${params.toString()}`;
-    console.log(apiUrl);
-    const response = await fetch(apiUrl, {
+    const url =
+      `${systemUrl}${systemUrlApi}` +
+      `app_key=${appKey}&` +
+      `timestamp=${timestamp}&` +
+      `sign_method=${sign_method}&` +
+      `code=${code}&` +
+      `sign=${sign}`;
+
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
       },
     });
     const result = await response.json();
-    return result;
+    console.log(result);
   } catch (error) {
     console.error("Error getting token");
   }
