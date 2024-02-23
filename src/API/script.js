@@ -40,7 +40,7 @@ export const getToken = async () => {
     console.log(sign);
     const url =
       `${systemUrl}${systemUrlApi}` +
-      `app_key=${appKey}&` +
+      `?app_key=${appKey}&` +
       `timestamp=${timestamp}&` +
       `sign_method=${sign_method}&` +
       `code=${code}&` +
