@@ -53,5 +53,3 @@ export const getToken = async () => {
     console.error("Error getting token");
   }
 };
-
-getToken();
