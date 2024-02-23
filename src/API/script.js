@@ -1,3 +1,5 @@
+import crypto from "crypto";
+
 const appKey = "504848";
 const sign_method = "sha256";
 const appSecret = "e9iSobbC8PWrnrcamXNAE5uX404dM8GP";
@@ -23,7 +25,7 @@ const generateSign = () => {
   console.log(timestamp);
   const string = `${appKey}${timestamp}${code}${appSecret}${sign_method}`;
   console.log(string);
-  const hash = Crypto.createHash("sha256").update(string).digest("hex");
+  const hash = crypto.createHash("sha256").update(string).digest("hex");
   console.log(hash);
   return hash;
 };
