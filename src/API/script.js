@@ -24,11 +24,12 @@ const generateSign = () => {
   const timestamp = Date.now().toString();
   console.log(timestamp);
   const string = `${appKey}${code}${sign_method}${timestamp}`;
-  const strToUpper = string.toUpperCase();
   console.log(string);
-  const hash = CryptoJS.HmacSHA256(strToUpper, appSecret);
+  const hash = CryptoJS.HmacSHA256(string, appSecret);
+  const signature = hash.toString(CryptoJS.enc.Hex);
+  const sigToUpper = signature.toUpperCase();
   console.log(hash);
-  return hash.toString(CryptoJS.enc.Hex);
+  return sigToUpper;
 };
 
 export const getToken = async () => {
