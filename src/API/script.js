@@ -18,10 +18,13 @@ export const getCode = async () => {
 
 const generateSign = () => {
   const code = localStorage.getItem("authCode");
+  console.log(code);
   const timestamp = Date.now().toString();
+  console.log(timestamp);
   const string = `${appKey}${timestamp}${code}${appSecret}${sign_method}`;
+  console.log(string);
   const hash = crypto.createHash("sha256").update(string).digest("hex");
-
+  console.log(hash);
   return hash;
 };
 
