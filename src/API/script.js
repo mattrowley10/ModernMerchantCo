@@ -1,4 +1,4 @@
-import crypto from "crypto";
+import crypto from "crypto-browserify";
 
 const appKey = "504848";
 const sign_method = "sha256";
