@@ -25,7 +25,7 @@ const generateSign = () => {
   console.log(timestamp);
   const string = `${appKey}${timestamp}${code}${appSecret}${sign_method}`;
   console.log(string);
-  const hash = CryptoJS.SHA256(string).toString(CryptoJS.enc.Hex);
+  const hash = CryptoJS.HmacSHA256(string).toString(CryptoJS.enc.Hex);
   console.log(hash);
   return hash;
 };
