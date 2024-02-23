@@ -24,8 +24,9 @@ const generateSign = () => {
   const timestamp = Date.now().toString();
   console.log(timestamp);
   const string = `${appKey}${timestamp}${code}${appSecret}${sign_method}`;
+  const strToUpper = string.toUpperCase();
   console.log(string);
-  const hash = CryptoJS.HmacSHA256(string, appSecret);
+  const hash = CryptoJS.HmacSHA256(strToUpper, appSecret);
   console.log(hash);
   return hash.toString(CryptoJS.enc.Hex);
 };
