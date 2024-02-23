@@ -1,4 +1,5 @@
 const appKey = "504848";
+const sign_method = "sha256";
 const appSecret = "e9iSobbC8PWrnrcamXNAE5uX404dM8GP";
 const redirectUri = "https://merchantco.netlify.app/home";
 const systemUrl = "https://api-sg.aliexpress.com/rest";
@@ -17,8 +18,8 @@ export const getCode = async () => {
 const generateSign = () => {
   const code = localStorage.getItem("authCode");
   const timestamp = Date.now().toString;
-  const string = `${appKey}${timestamp}${code}${appSecret}`;
-  const hash = crypto.createHash("sha256").update(string).digest("base64");
+  const string = `${appKey}${timestamp}${code}${appSecret}${sign_method}`;
+  const hash = crypto.createHash("sha256").update(string).digest("hex");
 
   return hash;
 };
@@ -29,15 +30,13 @@ export const getToken = async () => {
     console.log(code);
     const timestamp = Date.now().toString();
     console.log(timestamp);
-    const encodedTimestamp = encodedURIComponent(timestamp);
-    const signMethod = "sha256";
-    const sign = generateSign(appKey, timestamp, code, appSecret);
+    const sign = generateSign(appKey, timestamp, code, appSecret, sign_method);
     console.log(sign);
     const params = new URLSearchParams();
     params.append("app_key", appKey);
     params.append("timestamp", timestamp);
     params.append("code", code);
-    params.append("sign_method", signMethod);
+    params.append("sign_method", sign_method);
     params.append("sign", sign);
     const apiUrl = `${systemUrl}/auth/token/security/create${params.toString()}`;
     console.log(apiUrl);
