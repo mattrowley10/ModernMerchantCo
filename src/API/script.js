@@ -18,47 +18,18 @@ export const getCode = async () => {
   return code;
 };
 
-const generateSign = (
-  appKey,
-  appSecret,
-  code,
-  signMethod,
-  timestamp,
-  apiName = ""
-) => {
-  // Step 1: Sort all request parameters alphabetically by parameter name
-  const params = {
-    app_key: appKey,
-    timestamp: timestamp,
-    sign_method: signMethod,
-    code: code,
-  };
-  const sortedParams = Object.keys(params)
-    .sort()
-    .reduce((acc, key) => {
-      acc[key] = params[key];
-      return acc;
-    }, {});
-
-  // Step 2: Concatenate the sorted parameters and their values into a string
-  let concatenatedString = "";
-  if (apiName) {
-    concatenatedString += apiName;
-  }
-  for (const key in sortedParams) {
-    concatenatedString += key + sortedParams[key];
-  }
-
-  // Step 3: Encode the concatenated string in UTF-8 format
-  const encodedString = encodeURIComponent(concatenatedString);
-
-  // Step 4: Generate a digest using the HMAC-SHA256 algorithm with the application secret
-  const hash = CryptoJS.HmacSHA256(encodedString, appSecret);
-
-  // Step 5: Convert the digest to hexadecimal format
+const generateSign = () => {
+  const code = localStorage.getItem("authCode");
+  console.log(code);
+  const timestamp = Date.now().toString();
+  console.log(timestamp);
+  const string = `${systemUrlApi}${appKey}${code}${sign_method}${timestamp}`;
+  console.log(string);
+  const hash = CryptoJS.HmacSHA256(string, appSecret);
   const signature = hash.toString(CryptoJS.enc.Hex);
-
-  return signature;
+  const sigToUpper = signature.toUpperCase();
+  console.log(hash);
+  return sigToUpper;
 };
 
 export const getToken = async () => {
