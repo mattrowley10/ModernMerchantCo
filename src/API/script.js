@@ -23,7 +23,7 @@ const generateSign = () => {
   console.log(timestamp);
   const string = `${appKey}${timestamp}${code}${appSecret}${sign_method}`;
   console.log(string);
-  const hash = crypto.createHash("sha256").update(string).digest("hex");
+  const hash = Crypto.createHash("sha256").update(string).digest("hex");
   console.log(hash);
   return hash;
 };
