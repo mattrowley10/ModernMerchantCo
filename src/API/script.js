@@ -21,11 +21,13 @@ export const getCode = async () => {
 const generateSign = () => {
   const code = localStorage.getItem("authCode");
   const timestamp = Date.now().toString();
-  const params = {}; // Initialize as empty object
-  params["app_key"] = appKey;
-  params["timestamp"] = timestamp;
-  params["sign_method"] = sign_method;
-  params["code"] = code;
+  const params = {
+    app_key: appKey,
+    timestamp: timestamp,
+    sign_method: sign_method,
+    code: code,
+  };
+  console.log(params);
 
   const sortedParams = Object.keys(params)
     .sort()
@@ -48,12 +50,6 @@ const generateSign = () => {
   const signature = hash.toString(CryptoJS.enc.Hex);
   console.log(signature);
   return signature;
-};
-
-const testGenerateSign = () => {
-  console.log("Calling generateSign...");
-  const signature = generateSign();
-  console.log("Signature:", signature);
 };
 
 testGenerateSign();
