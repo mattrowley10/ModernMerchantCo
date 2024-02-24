@@ -21,12 +21,11 @@ export const getCode = async () => {
 const generateSign = () => {
   const code = localStorage.getItem("authCode");
   const timestamp = Date.now().toString();
-  const params = {
-    app_key: appKey,
-    timestamp: timestamp,
-    sign_method: sign_method,
-    code: code,
-  };
+  const params = {}; // Initialize as empty object
+  params["app_key"] = appKey;
+  params["timestamp"] = timestamp;
+  params["sign_method"] = sign_method;
+  params["code"] = code;
 
   const sortedParams = Object.keys(params)
     .sort()
