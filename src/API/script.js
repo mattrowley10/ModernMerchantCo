@@ -34,18 +34,20 @@ const generateSign = () => {
       acc[key] = params[key];
       return acc;
     });
+  console.log(sortedParams);
 
   let concatenatedString = "";
   for (const key in sortedParams) {
     concatenatedString += key + sortedParams[key];
   }
+  console.log(concatenatedString);
 
   const encodedString = encodeURIComponent(concatenatedString);
-
+  console.log(encodedString);
   const hash = CryptoJS.HmacSHA256(encodedString, appSecret);
-
+  console.log(hash);
   const signature = hash.toString(CryptoJS.enc.Hex);
-
+  console.log(signature);
   return signature;
 };
 
