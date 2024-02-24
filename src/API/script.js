@@ -19,18 +19,48 @@ export const getCode = async () => {
 };
 
 const generateSign = () => {
-  const code = localStorage.getItem("authCode");
-  console.log(code);
   const timestamp = Date.now().toString();
-  console.log(timestamp);
-  const string = `${systemUrlApi}${appKey}${code}${sign_method}${timestamp}`;
-  console.log(string);
-  const hash = CryptoJS.HmacSHA256(string, appSecret);
+  const params = {
+    app_key: appKey,
+    timestamp: timestamp,
+    sign_method: sign_method,
+    code: code,
+  };
+
+  const sortedParams = Object.keys(params)
+    .sort()
+    .reduce((acc, key) => {
+      acc[key] = params[key];
+      return acc;
+    });
+
+  let concatenatedString = "";
+  for (const key in sortedParams) {
+    concatenatedString += key + sortedParams[key];
+  }
+
+  const encodedString = encodeURIComponent(concatenatedString);
+
+  const hash = CryptoJS.HmacSHA256(encodedString, appSecret);
+
   const signature = hash.toString(CryptoJS.enc.Hex);
-  const sigToUpper = signature.toUpperCase();
-  console.log(hash);
-  return sigToUpper;
+
+  return signature;
 };
+
+// const generateSign = () => {
+//   const code = localStorage.getItem("authCode");
+//   console.log(code);
+//   const timestamp = Date.now().toString();
+//   console.log(timestamp);
+//   const string = `${systemUrlApi}${appKey}${code}${sign_method}${timestamp}`;
+//   console.log(string);
+//   const hash = CryptoJS.HmacSHA256(string, appSecret);
+//   const signature = hash.toString(CryptoJS.enc.Hex);
+//   const sigToUpper = signature.toUpperCase();
+//   console.log(hash);
+//   return sigToUpper;
+// };
 
 export const getToken = async () => {
   try {
@@ -38,7 +68,7 @@ export const getToken = async () => {
     console.log(code);
     const timestamp = Date.now().toString();
     console.log(timestamp);
-    const sign = generateSign();
+    const sign = generateSign(appKey, appSecret, code, sign_method, timestamp);
     console.log(sign);
     const url =
       `${systemUrl}${systemUrlApi}` +
