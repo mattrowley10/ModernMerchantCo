@@ -52,7 +52,6 @@ const generateSign = () => {
   return signature;
 };
 
-testGenerateSign();
 // const generateSign = () => {
 //   const code = localStorage.getItem("authCode");
 //   console.log(code);
