@@ -19,6 +19,7 @@ export const getCode = async () => {
 };
 
 const generateSign = () => {
+  const code = localStorage.getItem("authCode");
   const timestamp = Date.now().toString();
   const params = {
     app_key: appKey,
