@@ -51,6 +51,13 @@ const generateSign = () => {
   return signature;
 };
 
+const testGenerateSign = () => {
+  console.log("Calling generateSign...");
+  const signature = generateSign();
+  console.log("Signature:", signature);
+};
+
+testGenerateSign();
 // const generateSign = () => {
 //   const code = localStorage.getItem("authCode");
 //   console.log(code);
