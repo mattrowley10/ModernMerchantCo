@@ -34,7 +34,7 @@ const generateSign = () => {
     .reduce((acc, key) => {
       acc[key] = params[key];
       return acc;
-    });
+    }, {});
   console.log(sortedParams);
 
   let concatenatedString = "";
