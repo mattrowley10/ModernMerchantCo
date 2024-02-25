@@ -37,9 +37,9 @@ const generateSign = () => {
     }, {});
   console.log(sortedParams);
 
-  let concatenatedString = `${systemUrlApi}`;
+  let concatenatedString = "/auth/token/security/create";
   for (const key in sortedParams) {
-    concatenatedString += key + sortedParams[key];
+    concatenatedString += `${key}${sortedParams[key]}`;
   }
 
   console.log(concatenatedString);
