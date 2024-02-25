@@ -37,12 +37,12 @@ const generateSign = () => {
     }, {});
   console.log(sortedParams);
 
-  let concatenatedString = "";
-  for (const key in sortedParams) {
-    concatenatedString += `${key}${sortedParams[key]}`;
-  }
+  let concatenatedString = Object.entries(sortedParams)
+    .map(([key, value]) => `${key}${value}`)
+    .join("");
+
   const apiName = "/auth/token/security/create";
-  concatenatedString = apiName + concatenatedString;
+  concatenatedString = `${apiName}${concatenatedString}`;
   console.log(concatenatedString);
 
   const encodedString = encodeURIComponent(concatenatedString);
