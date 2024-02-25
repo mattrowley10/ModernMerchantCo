@@ -37,13 +37,11 @@ const generateSign = () => {
     }, {});
   console.log(sortedParams);
 
-  let concatenatedString = "";
+  let concatenatedString = `${systemUrlApi}`;
   for (const key in sortedParams) {
     concatenatedString += key + sortedParams[key];
   }
-  concatenatedString = systemUrlApi + concatenatedString;
 
-  concatenatedString = concatenatedString.toUpperCase();
   console.log(concatenatedString);
 
   const encodedString = encodeURIComponent(concatenatedString);
