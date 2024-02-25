@@ -49,8 +49,8 @@ const generateSign = () => {
   console.log(encodedString);
   const hash = CryptoJS.HmacSHA256(encodedString, appSecret);
   console.log(hash);
-  let signature = hash.toString(CryptoJS.enc.Hex);
-  signature = signature.toUpperCase();
+  const signature = hash.toString(CryptoJS.enc.Hex).toUpperCase();
+
   console.log(signature);
 
   return signature;
