@@ -7,6 +7,7 @@ const redirectUri = "https://merchantco.netlify.app/home";
 const systemUrl = "https://api-sg.aliexpress.com/rest";
 const systemUrlApi = "/auth/token/security/create";
 const businessUrl = "https://api-sg.aliexpress.com/sync?method=";
+const timestamp = Date.now().toString();
 
 export const getCode = async () => {
   const URLParams = new URLSearchParams(window.location.search);
@@ -20,7 +21,6 @@ export const getCode = async () => {
 
 const generateSign = () => {
   const code = localStorage.getItem("authCode");
-  const timestamp = Date.now().toString();
   const params = {
     app_key: appKey,
     timestamp: timestamp,
@@ -49,7 +49,7 @@ const generateSign = () => {
   console.log(encodedString);
   const hash = CryptoJS.HmacSHA256(encodedString, appSecret);
   console.log(hash);
-  const signature = hash.toString(CryptoJS.enc.Hex);
+  const signature = hash.toString(CryptoJS.enc.Hex).toUpperCase();
 
   console.log(signature);
 
@@ -60,8 +60,6 @@ export const getToken = async () => {
   try {
     const code = localStorage.getItem("authCode");
     console.log(code);
-    const timestamp = Date.now().toString();
-    console.log(timestamp);
     const sign = generateSign();
     console.log(sign);
     const url =
