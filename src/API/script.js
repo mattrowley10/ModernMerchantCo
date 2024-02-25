@@ -50,24 +50,12 @@ const generateSign = () => {
   console.log(encodedString);
   const hash = CryptoJS.HmacSHA256(encodedString, appSecret);
   console.log(hash);
-  const signature = hash.toString(CryptoJS.enc.Hex);
+  let signature = hash.toString(CryptoJS.enc.Hex);
+  signature = signature.toUpperCase();
   console.log(signature);
+
   return signature;
 };
-
-// const generateSign = () => {
-//   const code = localStorage.getItem("authCode");
-//   console.log(code);
-//   const timestamp = Date.now().toString();
-//   console.log(timestamp);
-//   const string = `${systemUrlApi}${appKey}${code}${sign_method}${timestamp}`;
-//   console.log(string);
-//   const hash = CryptoJS.HmacSHA256(string, appSecret);
-//   const signature = hash.toString(CryptoJS.enc.Hex);
-//   const sigToUpper = signature.toUpperCase();
-//   console.log(hash);
-//   return sigToUpper;
-// };
 
 export const getToken = async () => {
   try {
