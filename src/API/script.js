@@ -23,6 +23,7 @@ const generateSign = () => {
   const code = localStorage.getItem("authCode");
   const params = {
     app_key: appKey,
+    app_secret: appSecret,
     timestamp: timestamp,
     sign_method: sign_method,
     code: code,
@@ -41,7 +42,7 @@ const generateSign = () => {
     .map(([key, value]) => `${key}${value}`)
     .join("");
 
-  const apiName = "/auth/token/security/create";
+  const apiName = "/auth/token/create";
   concatenatedString = `${apiName}${concatenatedString}`;
   console.log(concatenatedString);
 
