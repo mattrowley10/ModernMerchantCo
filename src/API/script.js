@@ -29,7 +29,13 @@ const generateSign = () => {
   };
   console.log(params);
 
-  const sortedParams = Object.keys(params).sort();
+  const sortedParams = Object.keys(params)
+    .sort()
+    .reduce((acc, key) => {
+      acc[key] = params[key];
+      return acc;
+    }, {});
+  console.log(sortedParams);
 
   let concatenatedString = Object.entries(sortedParams)
     .map(([key, value]) => `${key}${value}`)
@@ -39,8 +45,6 @@ const generateSign = () => {
   concatenatedString = `${apiName}${concatenatedString}`;
   console.log(concatenatedString);
 
-  // const encodedString = encodeURIComponent(concatenatedString);
-  // console.log(encodedString);
   const hash = CryptoJS.HmacSHA256(concatenatedString, appSecret);
   console.log(hash);
   const signature = hash.toString(CryptoJS.enc.Hex).toUpperCase();
