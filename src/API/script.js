@@ -71,7 +71,7 @@ export const getToken = async () => {
       `sign=${sign}`;
 
     const response = await fetch(url, {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
       },
