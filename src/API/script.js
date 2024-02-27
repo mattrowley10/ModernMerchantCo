@@ -86,7 +86,7 @@ export const getToken = async () => {
       },
     });
     const result = await response.json();
-    return result;
+    console.log(result);
   } catch (error) {
     console.error("Error getting token");
   }
