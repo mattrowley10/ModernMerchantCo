@@ -31,10 +31,9 @@ const generateSign = () => {
 
   const sortedParams = Object.keys(params).sort();
 
-  let concatenatedString = Object.entries(sortedParams);
-  for (const key of sortedParams) {
-    concatenatedString += key + params[key];
-  }
+  let concatenatedString = Object.entries(sortedParams)
+    .map(([key, value]) => `${key}${value}`)
+    .join("");
 
   const apiName = "/auth/token/security/create";
   concatenatedString = `${apiName}${concatenatedString}`;
