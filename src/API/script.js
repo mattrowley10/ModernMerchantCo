@@ -56,14 +56,17 @@ const generateSign = () => {
   return signature;
 };
 const testSign = () => {
-  generateSign();
+  const sign = generateSign();
+  if (sign) {
+    localStorage.setItem("sign", sign);
+  }
 };
 testSign();
 export const getToken = async () => {
   try {
     const code = localStorage.getItem("authCode");
     console.log(code);
-    const sign = generateSign();
+    const sign = localStorage.getItem("sign");
     console.log(sign);
     const url =
       `${systemUrl}${systemUrlApi}` +
