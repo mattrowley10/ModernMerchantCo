@@ -23,7 +23,6 @@ const generateSign = () => {
   const code = localStorage.getItem("authCode");
   const params = {
     app_key: appKey,
-    app_secret: appSecret,
     timestamp: timestamp,
     sign_method: sign_method,
     code: code,
