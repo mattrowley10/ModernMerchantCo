@@ -55,7 +55,10 @@ const generateSign = () => {
 
   return signature;
 };
-
+const testSign = () => {
+  generateSign();
+};
+testSign();
 export const getToken = async () => {
   try {
     const code = localStorage.getItem("authCode");
