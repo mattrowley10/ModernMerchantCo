@@ -41,7 +41,7 @@ const generateSign = () => {
     .map(([key, value]) => `${key}${value}`)
     .join("");
 
-  const apiName = "/auth/token/create";
+  const apiName = "/auth/token/security/create";
   concatenatedString = `${apiName}${concatenatedString}`;
   console.log(concatenatedString);
 
