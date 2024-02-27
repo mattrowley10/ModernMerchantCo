@@ -61,11 +61,11 @@ export const getToken = async () => {
     const sign = generateSign();
     console.log(sign);
     const encodedParams = {
-      app_key: encodedURIcomponent(appKey),
+      app_key: encodeURIcomponent(appKey),
       timestamp: encodeURIComponent(timestamp),
       sign_method: encodeURIComponent(sign_method),
       code: encodeURIComponent(code),
-      sign: encodedURIcomponent(sign),
+      sign: encodeURIcomponent(sign),
     };
     // const url =
     //   `${systemUrl}${systemUrlApi}` +
