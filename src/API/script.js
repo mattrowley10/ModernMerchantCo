@@ -78,7 +78,9 @@ export const getToken = async () => {
     const queryParams = Object.entries(encodedParams)
       .map(([key, value]) => `${key}=${value}`)
       .join("&");
+    console.log(queryParams);
     const url = `${systemUrl}${systemUrlApi}?${queryParams}`;
+    console.log(url);
     const response = await fetch(url, {
       method: "GET",
       headers: {
@@ -88,6 +90,6 @@ export const getToken = async () => {
     const result = await response.json();
     console.log(result);
   } catch (error) {
-    console.error("Error getting token");
+    console.error("Error getting token", error.message);
   }
 };
