@@ -57,18 +57,11 @@ export const getToken = async () => {
     console.log(sign);
     const encodedParams = {
       app_key: encodeURIComponent(appKey),
-      timestamp: encodeURIComponent(timestamp),
-      sign_method: encodeURIComponent(sign_method),
       code: encodeURIComponent(code),
+      sign_method: encodeURIComponent(sign_method),
+      timestamp: encodeURIComponent(timestamp),
       sign: encodeURIComponent(sign),
     };
-    // const url =
-    //   `${systemUrl}${systemUrlApi}` +
-    //   `?app_key=${appKey}&` +
-    //   `timestamp=${timestamp}&` +
-    //   `sign_method=${sign_method}&` +
-    //   `code=${code}&` +
-    //   `sign=${sign}`;
 
     const queryParams = Object.entries(encodedParams)
       .map(([key, value]) => `${key}=${value}`)
