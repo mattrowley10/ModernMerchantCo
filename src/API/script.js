@@ -29,17 +29,12 @@ const generateSign = () => {
   };
   console.log(params);
 
-  const sortedParams = Object.keys(params)
-    .sort()
-    .reduce((acc, key) => {
-      acc[key] = params[key];
-      return acc;
-    }, {});
-  console.log(sortedParams);
+  const sortedKeys = Object.keys(params).sort();
 
-  let concatenatedString = Object.entries(sortedParams)
-    .map(([key, value]) => `${key}${value}`)
-    .join("");
+  let concatenatedString = "";
+  for (const key of sortedKeys) {
+    concatenatedString += key + params[key];
+  }
 
   const apiName = "/auth/token/security/create";
   concatenatedString = `${apiName}${concatenatedString}`;
