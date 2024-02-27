@@ -3,7 +3,7 @@ import CryptoJS from "crypto-js";
 const appKey = "504848";
 const sign_method = "sha256";
 const appSecret = "e9iSobbC8PWrnrcamXNAE5uX404dM8GP";
-const redirectUri = "https://merchantco.netlify.app/home";
+const redirectUri = "https://modernmerchantco.netlify.app/home";
 const systemUrl = "https://api-sg.aliexpress.com/rest";
 const systemUrlApi = "/auth/token/security/create";
 const businessUrl = "https://api-sg.aliexpress.com/sync?method=";
@@ -29,17 +29,12 @@ const generateSign = () => {
   };
   console.log(params);
 
-  const sortedParams = Object.keys(params)
-    .sort()
-    .reduce((acc, key) => {
-      acc[key] = params[key];
-      return acc;
-    }, {});
-  console.log(sortedParams);
+  const sortedParams = Object.keys(params).sort();
 
-  let concatenatedString = Object.entries(sortedParams)
-    .map(([key, value]) => `${key}${value}`)
-    .join("");
+  let concatenatedString = Object.entries(sortedParams);
+  for (const key of sortedParams) {
+    concatenatedString += key + params[key];
+  }
 
   const apiName = "/auth/token/security/create";
   concatenatedString = `${apiName}${concatenatedString}`;
@@ -55,24 +50,32 @@ const generateSign = () => {
 
   return signature;
 };
-const testSign = () => {
-  generateSign();
-};
-testSign();
+
 export const getToken = async () => {
   try {
     const code = localStorage.getItem("authCode");
     console.log(code);
     const sign = generateSign();
     console.log(sign);
-    const url =
-      `${systemUrl}${systemUrlApi}` +
-      `?app_key=${appKey}&` +
-      `timestamp=${timestamp}&` +
-      `sign_method=${sign_method}&` +
-      `code=${code}&` +
-      `sign=${sign}`;
+    const encodedParams = {
+      app_key: encodedURIcomponent(appKey),
+      timestamp: encodeURIComponent(timestamp),
+      sign_method: encodeURIComponent(sign_method),
+      code: encodeURIComponent(code),
+      sign: encodedURIcomponent(sign),
+    };
+    // const url =
+    //   `${systemUrl}${systemUrlApi}` +
+    //   `?app_key=${appKey}&` +
+    //   `timestamp=${timestamp}&` +
+    //   `sign_method=${sign_method}&` +
+    //   `code=${code}&` +
+    //   `sign=${sign}`;
 
+    const queryParams = Object.entries(encodedParams)
+      .map(([key, value]) => `${key}=${value}`)
+      .join("&");
+    const url = `${systemUrl}${systemUrlApi}?${queryParams}`;
     const response = await fetch(url, {
       method: "GET",
       headers: {
